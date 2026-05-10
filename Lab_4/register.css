@@ -1,0 +1,281 @@
+/* ===================================
+   REGISTER PAGE — register.css
+   =================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  background: #eef2ff;
+}
+
+/* ── Page wrapper ── */
+.page-wrapper {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  overflow: hidden;
+}
+
+/* ── Decorative blobs ── */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob-1 {
+  width: 520px;
+  height: 520px;
+  background: #bfdbfe;
+  top: -120px;
+  left: -160px;
+}
+
+.blob-2 {
+  width: 420px;
+  height: 420px;
+  background: #c7d2fe;
+  bottom: -100px;
+  right: -100px;
+}
+
+/* ── Card ── */
+.card {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-radius: 22px;
+  padding: 40px 40px 32px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 60px rgba(99, 102, 241, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Icon ── */
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.38);
+}
+
+.icon-circle i {
+  font-size: 27px;
+  color: #fff;
+}
+
+/* ── Headings ── */
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.card-subtitle {
+  font-size: 13.5px;
+  color: #6b7280;
+  margin-bottom: 28px;
+}
+
+/* ── Two-column row ── */
+.form-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+/* ── Form group ── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+/* ── Input wrapper ── */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper .input-icon {
+  position: absolute;
+  left: 11px;
+  font-size: 16px;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 10px 36px 10px 34px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: #111827;
+  background: #f9fafb;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-wrapper input:focus {
+  border-color: #2563eb;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.input-wrapper input::placeholder { color: #b0b7c3; }
+
+/* ── Toggle password ── */
+.toggle-pw {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.toggle-pw:hover { color: #2563eb; }
+
+/* ── Terms row ── */
+.terms-row {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Custom checkbox */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 13px;
+  color: #374151;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1.5;
+}
+
+.checkbox-label input[type="checkbox"] { display: none; }
+
+.checkmark {
+  width: 17px;
+  height: 17px;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.checkbox-label input:checked + .checkmark {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.checkbox-label input:checked + .checkmark::after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translateY(-1px);
+  display: block;
+}
+
+/* ── Links ── */
+.link {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link:hover { color: #1d4ed8; text-decoration: underline; }
+
+/* ── Primary button ── */
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  margin-bottom: 16px;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+/* ── Bottom login text ── */
+.bottom-text {
+  font-size: 13.5px;
+  color: #6b7280;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .form-row { grid-template-columns: 1fr; }
+  .card { padding: 32px 20px 28px; }
+}
