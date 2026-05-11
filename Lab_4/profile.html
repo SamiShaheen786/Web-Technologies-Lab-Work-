@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Account – Profile Update</title>
+  <link rel="stylesheet" href="profile.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ===== TOP NAV ===== -->
+  <header class="topnav">
+    <div class="topnav-left">
+      <i class="bx bxs-user-circle nav-avatar-icon"></i>
+      <span class="nav-brand">My Account</span>
+    </div>
+    <button class="icon-btn" aria-label="Notifications">
+      <i class="bx bx-bell"></i>
+      <span class="badge">3</span>
+    </button>
+  </header>
+
+  <!-- ===== LAYOUT ===== -->
+  <div class="layout">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar">
+      <nav>
+        <a href="#" class="nav-item" data-label="Dashboard">
+          <i class="bx bx-home-alt"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item active" data-label="Profile">
+          <i class="bx bxs-user"></i>
+          <span>Profile</span>
+        </a>
+        <a href="#" class="nav-item" data-label="Security">
+          <i class="bx bx-shield-quarter"></i>
+          <span>Security</span>
+        </a>
+        <a href="#" class="nav-item" data-label="Notifications">
+          <i class="bx bx-bell"></i>
+          <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-item" data-label="Settings">
+          <i class="bx bx-cog"></i>
+          <span>Settings</span>
+        </a>
+        <a href="login.html" class="nav-item logout" data-label="Logout">
+          <i class="bx bx-log-out"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- ── Main content ── -->
+    <main class="main-content">
+
+      <div class="section-header">
+        <h2>Profile Update</h2>
+        <p>Update your personal information</p>
+      </div>
+
+      <div class="profile-card">
+
+        <!-- Avatar upload -->
+        <div class="avatar-section">
+          <div class="avatar-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+              alt="Profile picture"
+              class="avatar-img"
+              id="avatarImg"
+            />
+            <label class="avatar-upload-btn" for="avatarInput" title="Change photo">
+              <i class="bx bx-camera"></i>
+            </label>
+            <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="previewAvatar(event)"/>
+          </div>
+          <p class="avatar-hint">Change Profile Picture</p>
+          <p class="avatar-hint small">JPG, PNG or GIF. Max size 2MB</p>
+        </div>
+
+        <!-- Form fields -->
+        <div class="form-area">
+
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" value="Ahmad Ali"/>
+          </div>
+
+          <div class="form-group">
+            <label for="emailAddr">Email Address</label>
+            <input type="email" id="emailAddr" value="ahmadali@example.com"/>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" value="+92 300 1234567"/>
+          </div>
+
+          <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea id="bio" rows="4" placeholder="Tell us about yourself…">Passionate web developer and tech enthusiast.</textarea>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="btn-row">
+            <button class="btn-cancel" type="button" onclick="cancelChanges()">Cancel</button>
+            <button class="btn-save"   type="button" onclick="saveChanges()">Save Changes</button>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    /* ---- Sidebar active item ---- */
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', function (e) {
+        if (!this.classList.contains('logout')) {
+          e.preventDefault();
+          document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+    });
+
+    /* ---- Avatar preview ---- */
+    function previewAvatar(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => document.getElementById('avatarImg').src = e.target.result;
+      reader.readAsDataURL(file);
+    }
+
+    /* ---- Cancel: reset to defaults ---- */
+    const defaults = {
+      fullName : 'Ahmad Ali',
+      emailAddr: 'ahmadali@example.com',
+      phone    : '+92 300 1234567',
+      bio      : 'Passionate web developer and tech enthusiast.',
+    };
+
+    function cancelChanges() {
+      Object.entries(defaults).forEach(([id, val]) => document.getElementById(id).value = val);
+    }
+
+    /* ---- Save: show toast ---- */
+    function saveChanges() {
+      showToast('Changes saved successfully!');
+    }
+
+    function showToast(msg) {
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => t.classList.add('show'), 10);
+      setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 2500);
+    }
+  </script>
+
+</body>
+</html>
