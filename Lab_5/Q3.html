@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <title>To Do List</title>
+
+    <style>
+      .completed {
+        text-decoration: line-through;
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>To Do List</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter Task" />
+
+    <button onclick="addTask()">Add Task</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+      showTasks();
+
+      function addTask() {
+        let taskInput = document.getElementById("taskInput");
+
+        let taskText = taskInput.value;
+
+        if (taskText == "") {
+          alert("Enter a task");
+          return;
+        }
+
+        tasks.push({
+          text: taskText,
+          completed: false,
+        });
+
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+
+        taskInput.value = "";
+
+        showTasks();
+      }
+
+      function showTasks() {
+        let list = document.getElementById("taskList");
+
+        list.innerHTML = "";
+
+        for (let i = 0; i < tasks.length; i++) {
+          let li = document.createElement("li");
+
+          li.innerHTML = tasks[i].text;
+
+          if (tasks[i].completed) {
+            li.classList.add("completed");
+          }
+
+          li.onclick = function () {
+            tasks[i].completed = !tasks[i].completed;
+
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+
+            showTasks();
+          };
+
+          let delBtn = document.createElement("button");
+
+          delBtn.innerHTML = "Delete";
+
+          delBtn.onclick = function (event) {
+            event.stopPropagation();
+
+            tasks.splice(i, 1);
+
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+
+            showTasks();
+          };
+
+          li.appendChild(delBtn);
+
+          list.appendChild(li);
+        }
+      }
+    </script>
+  </body>
+</html>
